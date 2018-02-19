@@ -76,16 +76,16 @@ queueSize = 4096
 workerSize :: Int
 workerSize = 10
 
-mkRollbarScribe ::
-  RemoveHeaders headers =>
-  proxy headers ->
-  AccessToken ->
-  Maybe Branch ->
-  Maybe CodeVersion ->
-  Manager -> -- ^ Must support TLS
-  Severity ->
-  Verbosity ->
-  IO Scribe
+mkRollbarScribe
+  :: RemoveHeaders headers
+  => proxy headers
+  -> AccessToken
+  -> Maybe Branch
+  -> Maybe CodeVersion
+  -> Manager -- ^ Must support TLS
+  -> Severity
+  -> Verbosity
+  -> IO Scribe
 mkRollbarScribe proxy accessToken branch codeVersion manager severity verbosity = do
   queue <- newTBMQueueIO queueSize
   workers <- replicateM workerSize (async $ mkWorker proxy manager queue)
