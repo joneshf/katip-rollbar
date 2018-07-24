@@ -3,4 +3,7 @@ packages:
 - .
 extra-deps:
 - rollbar-hs-0.2.0.0
-resolver: lts-10.5
+- aeson-1.2.4.0
+- katip-0.6.0.0
+- base-compat-0.9.3
+resolver: lts-12.2
