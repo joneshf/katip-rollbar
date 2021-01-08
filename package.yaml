@@ -6,7 +6,7 @@ extra-source-files:
 github: joneshf/katip-rollbar
 library:
   dependencies:
-    - aeson >= 1.2 && < 1.5
+    - aeson >= 1.2 && < 1.6
     - async >= 2.1 && < 2.3
     - base >= 4.7 && < 5
     - hostname >= 1.0 && < 1.1

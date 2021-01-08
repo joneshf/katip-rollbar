@@ -4,6 +4,6 @@ packages:
 extra-deps:
     # - rollbar-hs-0.2.0.0
 - git: https://www.github.com/parsonsmatt/rollbar-hs
-  commit: 17770be71c0c1aa104b0db064c58c69384f3820a
+  commit: 01884d716d1360dc9336a8364db6657859684f0d
 
 resolver: lts-15.11
