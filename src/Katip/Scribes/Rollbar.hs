@@ -91,7 +91,7 @@ mkRollbarScribe proxy accessToken branch codeVersion manager severity verbosity 
   workers <- replicateM workerSize (async $ mkWorker proxy manager queue)
 
   let liPush item = do
-        permitted <- (permitItem severity item)
+        permitted <- permitItem severity item
         when permitted $
           atomically (writeTBMQueue queue $ rollbarItem' item)
       rollbarItem' item = rollbarItem proxy accessToken branch codeVersion verbosity item
