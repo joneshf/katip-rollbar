@@ -6,16 +6,16 @@ extra-source-files:
 github: joneshf/katip-rollbar
 library:
   dependencies:
-    - aeson >= 1.2 && < 1.3
-    - async >= 2.1 && < 2.2
+    - aeson >= 1.2 && < 1.5
+    - async >= 2.1 && < 2.3
     - base >= 4.7 && < 5
     - hostname >= 1.0 && < 1.1
     - http-client >= 0.5.10
-    - katip >= 0.5 && < 0.6
-    - rollbar-hs >= 0.2 && < 0.3
+    - katip >= 0.8 && < 0.9
+    - rollbar-hs >= 0.2 && < 0.4
     - stm-chans >= 3.0 && < 3.1
     - text >= 1.2 && < 1.3
-    - time >= 1.8 && < 1.9
+    - time >= 1.8 && < 1.10
   source-dirs: src
 license: BSD3
 maintainer: jones3.hardy@gmail.com
