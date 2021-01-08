@@ -12,10 +12,10 @@ module Katip.Scribes.Rollbar
 
 import Prelude hiding (error)
 
-import "base" Control.Monad           (replicateM, when)
-import "base" Data.Foldable           (for_)
-import "base" Data.Functor            (void)
-import "base" GHC.Conc                (atomically)
+import "base" Control.Monad (replicateM, when)
+import "base" Data.Foldable (for_)
+import "base" Data.Functor  (void)
+import "base" GHC.Conc      (atomically)
 
 import "async" Control.Concurrent.Async            (async, waitCatch)
 import "stm-chans" Control.Concurrent.STM.TBMQueue
