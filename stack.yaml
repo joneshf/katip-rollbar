@@ -1,6 +1,9 @@
-flags: {}
 packages:
-- .
+  - .
+
 extra-deps:
-- rollbar-hs-0.2.0.0
-resolver: lts-10.5
+  # - rollbar-hs-0.2.0.0
+  - git: https://www.github.com/parsonsmatt/rollbar-hs
+    commit: 01884d716d1360dc9336a8364db6657859684f0d
+
+resolver: lts-15.11

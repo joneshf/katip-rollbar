@@ -12,10 +12,10 @@ module Katip.Scribes.Rollbar
 
 import Prelude hiding (error)
 
-import "base" Control.Monad           (replicateM, when)
-import "base" Data.Foldable           (for_)
-import "base" Data.Functor            (void)
-import "base" GHC.Conc                (atomically)
+import "base" Control.Monad (replicateM, when)
+import "base" Data.Foldable (for_)
+import "base" Data.Functor  (void)
+import "base" GHC.Conc      (atomically)
 
 import "async" Control.Concurrent.Async            (async, waitCatch)
 import "stm-chans" Control.Concurrent.STM.TBMQueue
@@ -31,7 +31,7 @@ import "text" Data.Text.Lazy.Builder               (toLazyText)
 import "time" Data.Time.Clock                      (UTCTime)
 import "katip" Katip
     ( LogItem
-    , Scribe(Scribe, liPush, scribeFinalizer)
+    , Scribe(Scribe, liPush, scribeFinalizer, scribePermitItem)
     , Severity(DebugS, ErrorS, InfoS, NoticeS, WarningS)
     , Verbosity
     , getEnvironment
@@ -89,13 +89,18 @@ mkRollbarScribe
 mkRollbarScribe proxy accessToken branch codeVersion manager severity verbosity = do
   queue <- newTBMQueueIO queueSize
   workers <- replicateM workerSize (async $ mkWorker proxy manager queue)
-  let liPush item = when (permitItem severity item) $
-        atomically (writeTBMQueue queue $ rollbarItem' item)
+
+  let liPush item = do
+        permitted <- permitItem severity item
+        when permitted $
+          atomically (writeTBMQueue queue $ rollbarItem' item)
       rollbarItem' item = rollbarItem proxy accessToken branch codeVersion verbosity item
+      scribePermitItem =
+        permitItem severity
       scribeFinalizer = do
         atomically (closeTBMQueue queue)
         for_ workers waitCatch
-  pure Scribe { liPush, scribeFinalizer }
+  pure Scribe { liPush, scribeFinalizer, scribePermitItem }
 
 rollbarItem ::
   (LogItem a, RemoveHeaders headers) =>
