@@ -34,20 +34,20 @@ import "katip" Katip
     , Scribe(Scribe, liPush, scribeFinalizer, scribePermitItem)
     , Severity(DebugS, ErrorS, InfoS, NoticeS, WarningS)
     , Verbosity
-    , getEnvironment
-    , itemJson
-    , permitItem
-    , unLogStr
     , _itemEnv
     , _itemHost
     , _itemMessage
     , _itemSeverity
     , _itemTime
+    , getEnvironment
+    , itemJson
+    , permitItem
+    , unLogStr
     )
-import "hostname" Network.HostName                 (HostName)
 import "http-client" Network.HTTP.Client           (Manager)
-import "rollbar-hs" Rollbar.AccessToken            (AccessToken)
+import "hostname" Network.HostName                 (HostName)
 import "rollbar-hs" Rollbar.API                    (itemsPOST')
+import "rollbar-hs" Rollbar.AccessToken            (AccessToken)
 import "rollbar-hs" Rollbar.Item
     ( Item(Item, accessToken, itemData)
     , critical
